@@ -8,7 +8,6 @@ body {
     background-color: #222;
     color: white;
     height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +17,6 @@ body {
 main {
     border: 2px solid white;
     border-radius: 20px;
-    width: 50%;
     padding: 2rem;
     background-color: #333;
     max-width: 800px;
@@ -36,23 +34,43 @@ main #search-form {
 main #search-form form {
     display: flex;
     width: 100%;
+    gap: 0.5rem;
 }
 
 main #search-form input {
     width: 100%;
     flex: 1;
     gap: 0.5rem;
-
+    padding: 0 1rem;
     height: 32px;
     border-radius: 5px;
     border: none;
 }
 
 main #search-form button {
-    
+    border: none;
+    padding: 0rem 2rem;
+    background-color: green;
+    border-radius: 5px;
+    height: 32px;
+    color: white;
 }
 
-section #weather-info  {
-    
+main #weather-info  {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main #weather-info .weather-data h2 {
+    font-size: 18px;
+    margin-bottom: 0.2rem;
+    font-weight: 400;
+}
+
+
+main #weather-info .weather-data span {
+    font-size: 2rem;
+    font-weight: bold;
 }
 
