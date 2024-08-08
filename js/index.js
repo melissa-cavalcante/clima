@@ -12,14 +12,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const form = document.querySelector("#search-form");
 const input = document.querySelector("#input-localization");
+const sectionInfo = document.querySelector("#weather-info");
 form === null || form === void 0 ? void 0 : form.addEventListener("submit", (event) => __awaiter(void 0, void 0, void 0, function* () {
     event.preventDefault();
-    if (!input)
+    if (!input || !sectionInfo)
         return;
     const localization = input.value;
     if (localization.length < 3) {
         alert("A localização precisa ter mais que dois caracteres");
         return;
     }
-    const response = yield fetch("https://api.openweathermap.org/data/2.5/weather?q=${localization}&appid=8dce343cf8ac54315b6dd57e0c4b552f&units=metric&lang=pt_br");
+    const response = yield fetch(`https://api.openweathermap.org/data/2.5/weather?q=${localization}&appid=8dce343cf8ac54315b6dd57e0c4b552f&units=metric&lang=pt_br`);
+    const dados = yield response.json();
+    const infos = {
+        temperature: Math.round(dados.main.temp),
+        local: dados.name,
+        icon: `https://openweathermap.org/img/wn/${dados.weather[0].icon}@2x.png`
+    };
+    sectionInfo.innerHTML = `
+    <div class="weather-data">
+                <h2>${infos.local}</h2>
+    
+                <span>${infos.temperature}</span>
+            </div>
+
+            <img src="${infos.icon}"/>
+    `;
 }));
