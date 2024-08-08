@@ -18,23 +18,28 @@ form?.addEventListener("submit", async (event) => {
         return;
     }
 
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${localization}&appid=8dce343cf8ac54315b6dd57e0c4b552f&units=metric&lang=pt_br`);
-
-    const dados = await response.json();
-
-    const infos = {
-        temperature: Math.round(dados.main.temp),
-        local: dados.name,
-        icon: `https://openweathermap.org/img/wn/${dados.weather[0].icon}@2x.png`
-    };
-
-    sectionInfo.innerHTML = `
-    <div class="weather-data">
-                <h2>${infos.local}</h2>
+    try{
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${localization}&appid=8dce343cf8ac54315b6dd57e0c4b552f&units=metric&lang=pt_br`);
     
-                <span>${infos.temperature}</span>
-            </div>
+        const dados = await response.json();
+    
+        const infos = {
+            temperature: Math.round(dados.main.temp),
+            local: dados.name,
+            icon: `https://openweathermap.org/img/wn/${dados.weather[0].icon}@2x.png`
+        };
+    
+        sectionInfo.innerHTML = `
+        <div class="weather-data">
+                    <h2>${infos.local}</h2>
+        
+                    <span>${infos.temperature}</span>
+                </div>
+    
+                <img src="${infos.icon}"/>
+        `;
+    } catch (error) {
+        console.log("Deu um erro ao tentar obter os dados da API", error);
+    }
 
-            <img src="${infos.icon}"/>
-    `;
-})
+});
